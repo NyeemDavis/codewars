@@ -16,7 +16,7 @@ function XO(str) {
     let numOfO = 0
   let strArray = str.split('')
   strArray.forEach(letter => {
-    if(letter === 'x' | letter === 'X') {
+    if(letter === 'x' || letter === 'X') {
         numOfX += 1
     }else if(letter === 'o' || letter === 'O') {
         numOfO += 1 
