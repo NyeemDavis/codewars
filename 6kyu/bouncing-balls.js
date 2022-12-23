@@ -23,16 +23,18 @@ bouncingBall(30, .66, 1.5) // 3
 
 function bouncingBall(h, bounce, window) {
     // Check for everything that returns false
-    if(h == 0 || (bounce > 1 || bounce < 1) || window > h) {
+    if(h == 0 || (bounce >= 1) || window > h) {
         console.log(false)
     }
     // The mom will always see the ball at least(Initial fall)
     // Loop
-    let seen = 0
-    seen 
+    let seen = 1
+    h = h * bounce
     while(h > window) {
         h = h * bounce
-        seen += 1
+        seen += 2
     }
-    console.log(seen)
+    return seen
 }
+
+console.log(bouncingBall(30, .66, 1.5))
