@@ -14,6 +14,7 @@
 String.prototype.toAlternatingCase = function (str) {
     // Define your method here :)
     newstr = ''
+    // For each letter, if the letter is already uppercase. make it lower. other wise make it uppercase
     for(i = 0; i <= this.length; i++) {
         if(this[i] === this[i].toUpperCase()) {
             newstr += this[i].toLowerCase()

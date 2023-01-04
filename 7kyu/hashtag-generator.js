@@ -20,7 +20,9 @@ function createHashtag(str) {
     }
     // Create Hashtag
     let splitString = str.split('')
-    console.log(splitString)
+    
+    splitString.unshift('#')
+    console.log(splitString.join())
 }
 
 createHashtag('Hello Word')

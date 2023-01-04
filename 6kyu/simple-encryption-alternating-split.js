@@ -22,52 +22,55 @@
 
 // My solution
 
-encrypt("31231901", 4)
 
-function encrypt(text, n) {
+
+const encrypt = (text, n) => {
     if(n < 0 || (text == '' || text == null)) {
         return false
     }
 
-
+    // turns string into array for loops
     let splitStr = text.split('')
-    
-    // Loop
+    // Loop for amount of times user wants to encrypt
     for(i = 0; i < n; i++) {
-       let oddIndex =  []
+        let oddIndex = []
         let evenIndex = []
+        // Second loop, loops through string
         for(y = 0; y < splitStr.length; y++) {
-            if(y % 2 ) {
-                oddIndex.push(splitStr[y])
-                }else {
-                evenIndex.push(splitStr[y])
-                }
+            y % 2 ? oddIndex.push(splitStr[y]) : evenIndex.push(splitStr[y])
         }
-        let encrytedText = oddIndex.concat(evenIndex).join('')
-        splitStr = encrytedText
-        return encrytedText
-        
+        // Join the two arrays
+        encryptedText = oddIndex.concat(evenIndex).join('')
+        // Reset string to the new encrypted text for next loop
+        splitStr = encryptedText
     } 
+    console.log(encryptedText)
 }
 
+encrypt('012345', 5)
 
+// Decrypt function
+const decrypt = (encryptedText, n) => {
+    if(n < 0 || (encryptedText == '' || encryptedText == null)) {
+        return false
+    }
 
+    let splitStr = encryptedText.split('')
+    // Loop for amount of times user wants to encrypt
+    for(i = 0; i < n; i++) {
+        let oddIndex = []
+        let evenIndex = []
+        // Second loop, loops through string
+        for(y = 0; y < splitStr.length; y++) {
+            y % 2 ? oddIndex.push(splitStr[y]) : evenIndex.push(splitStr[y])
+        }
+        // Join the two arrays
+        decryptedText = evenIndex.concat(oddIndex).join('')
+        // Reset string to the new encrypted text for next loop
+        splitStr = encryptedText
+    } 
+    console.log(decryptedText)
 
-// function decrypt(encryptedText, n) {
+}
 
-//     for(i = 0; i < n; i++) {
-//         let oddIndex =  []
-//          let evenIndex = []
-//          for(y = 0; y < encryptedText.length; y++) {
-//              if(y % 2 ) {
-//                  evenIndex.push(splitStr[y])
-//                  }else {
-//                  oddIndex.push(splitStr[y])
-//                  }
-//          }
-//          let decryptedText = oddIndex.concat(evenIndex).join('')
-//          console.log(decryptedText)   
-//      } 
-// }
-
-// decrypt(encrypt(text), encrypt(n))
+// decrypt(encrypt('01234', 1), 1)
