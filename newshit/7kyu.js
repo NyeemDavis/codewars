@@ -19,41 +19,41 @@
     // Conditional on what to do based on time period
     // Special case of 12 o'clock
     // Return the hours + the rest of the time
-    const getMilitaryTime = (input) => {
-        // Get time into an array without the time period
-          // get the time substring itself without am or pm, start at 0 and move up until we are two indexed away from the end
-            // split into an array by the ":" to make 12:00:00AM -> [12, 00, 00]
-        const time = input.substring(0, input.length - 2).split(':');
-        // Figure out what time period we are in
-          // Use substring and start two indexes from end(AM/PM will always be in those posistions)
-        const timePeriod = input.substring(input.length - 2);
-        // Varibales to hold hours, and the rest of the time
-        let hours = '00';
+const getMilitaryTime = (input) => {
+  // Get time into an array without the time period
+    // get the time substring itself without am or pm, start at 0 and move up until we are two indexed away from the end
+      // split into an array by the ":" to make 12:00:00AM -> [12, 00, 00]
+  const time = input.substring(0, input.length - 2).split(':');
+  // Figure out what time period we are in
+    // Use substring and start two indexes from end(AM/PM will always be in those posistions)
+  const timePeriod = input.substring(input.length - 2);
+  // Varibales to hold hours, and the rest of the time
+  let hours = '00';
+  // The rest of the time not including the hours since we arent touching those
+  const restOfTime = time.slice(1);
+  
+  // Conditional on what to do based on time period
+    // If it is PM
+  if(timePeriod == 'PM') {
+    // 12 is the start of PM, so anything after will just be the hour added to 12
+    hours = 12 + Number(time[0])
+  } else {
+    // Quite literally nothing is done to morning times so hours just equals the hour given
+    hours = time[0]
+  };
+  // Special case of 12 o'clock
+    // If it is 12 AM, The hour is always 00 then add rest of time
+  if(time[0] == '12' && timePeriod == "AM") {
+    return '00:' + restOfTime.join(':')
+    // If its 12 PM, time is still 12, we do not add anything to hours, add the rest of the time after
+  } else if (time[0] === '12' && timePeriod == 'PM') {
+    return '12:' + restOfTime.join(':')
+  };
+    // Return our brand new military time
+  return hours + ':' + restOfTime.join(':');    
+};
 
-        // The rest of the time not including the hours since we arent touching those
-        const restOfTime = time.slice(1);
-        
-        // Conditional on what to do based on time period
-          // If it is PM
-        if(timePeriod == 'PM') {
-          // 12 is the start of PM, so anything after will just be the hour added to 12
-          hours = 12 + Number(time[0])
-        } else {
-          // Quite literally nothing is done to morning times so hours just equals the hour given
-          hours = time[0]
-        };
-
-        // Special case of 12 o'clock
-          // If it is 12 AM, The hour is always 00 then add rest of time
-        if(time[0] == '12' && timePeriod == "AM") {
-          return '00:' + restOfTime.join(':')
-          // If its 12 PM, time is still 12, we do not add anything to hours, add the rest of the time after
-        } else if (time[0] === '12' && timePeriod == 'PM') {
-          return '12:' + restOfTime.join(':')
-        };
-          // Return our brand new military time
-        return hours + ':' + restOfTime.join(':');
-      }
+console.log(`Time: ${getMilitaryTime('03:56:34PM')}`)
       
 
 // Visible dots on a die
@@ -95,4 +95,4 @@ const totalAmountVisible = (dice, topNum) => {
     totalDots = diceSides[dice] - opposite
     return totalDots
 }
-console.log(totalAmountVisible(6, 1))
+

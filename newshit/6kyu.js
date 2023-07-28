@@ -1,3 +1,35 @@
+// Your order, please
+// Link: https://www.codewars.com/kata/55c45be3b2079eccff00010f
+// Problem:
+    // Your task is to sort a given string. Each word in the string will contain a single number.
+    // This number is the position the word should have in the result.
+    // Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+    // If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+// Examples:
+    // "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+    // "4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+    // ""  -->  ""
+// Psuedocode:
+     // Split the string into an array by spaces to get just the words
+     // Create a new array to hold the final sequence
+     // Map over the array, taking the word and index as arguements
+        // Create a variable to hold the number in the word
+        // index = number - 1
+        // return array
+// Solution:
+const order = (words) => {
+  const orderArray = words.split(' ');
+  console.log(orderArray)
+  
+  console.log(orderArray.map((word, index) => {
+    const wordIndex = word.match(/[1-9]/g)
+    orderArray[Number(wordIndex.join('')) - 1] = word
+  }));
+
+}
+console.log(order('is2 Thi1s T4est 3a'))
+
+
 // Bouncing Balls  
 // https://www.codewars.com/kata/5544c7a5cb454edb3c000047
 // Problem:
@@ -245,32 +277,4 @@ const uniqueInOrder = (iterable) => {
     return filteredIterable
      };
 
-// Your order, please
-// Link: https://www.codewars.com/kata/55c45be3b2079eccff00010f
-// Problem:
-    // Your task is to sort a given string. Each word in the string will contain a single number.
-    // This number is the position the word should have in the result.
-    // Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
-    // If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
-// Examples:
-    // "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
-    // "4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
-    // ""  -->  ""
-// Psuedocode:
-     // Split the string into an array by spaces to get just the words
-     // Create a new array to hold the final sequence
-     // Map over the array, taking the word and index as arguements
-        // Create a variable to hold the number in the word
-        // index = number - 1
-        // return array
-// Solution:
-const order = (words) => {
-    const orderArray = words.split(' ');
-    
-    const finalArray = orderArray.map((word, index) => {
-        const wordIndex = word.match(/[1-9]/g)
-        orderArray[wordIndex - 1] = word
-    });
-  
-  return finalArray.join(' ')
-}
+
