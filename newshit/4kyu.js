@@ -45,48 +45,74 @@ const buildMatchesTable = (n) => {
     return matrix;
 }
 
-// Boggle Word Checker
-// Link: https://www.codewars.com/kata/57680d0128ed87c94f000bfd/train/javascript
-// Problem
-    // Given a word and a boggle board, check if the word exists in the board.
-    // The word can be constructed from letters of sequentially adjacent cells, where "adjacent" cells are those horizontally or vertically neighboring.
-    // The same letter cell may not be used more than once in a word.
-    // The board is a 2D array of characters.
-    // Two arguments, 2d aray and string
 
 
-// Psuedocode
-    // Keep track of marked letters
+// Conway's Game of Life
+// Link to Problem: https://www.codewars.com/kata/52423db9add6f6fc39000354/train/javascript
+// Notes
+    // Less then 2 alive neigbors => dead/underpopulation
+    // More than 3 alive neighbors => dead/overpopulation
+    // 2 or 3 live neighbors => survives/next-gen
+    // Dead cell with 3 live neighbors => alive
+    // Moving horizontally and vertically
+    // Recursion
 
-    // Make sure it doesn't attempt to reach outside of boundary
-        // Boundaries
-            // board[-1][0], board[0][-1], board[board.length][0], or board[0][board[0].length]
-const checkWord = (board, word) => {
-    const wordArr = word.split('')
-    const checked = Array.from(board, (item) => Array.from(item,  (x) => x = false))
-    for(i = 0; i < word.length; i++) {
-        const row = checked[i]
-        checked[row]
-        depthSearch(board, board[i], board[0][i])
+    var gliders = [
+        [[1,0,0],
+        [0,1,1],
+        [1,1,0]],
+        [[0,1,0],
+        [0,0,1],
+        [1,1,1]]
+    ];
+    // Check whether the cell is already dead or alive to skip some checks
+    // Recursion to search each neighbor
+    // Identify borders
+    // 2D Array
+    // Check boundaries
+    // Map function??
+    const getGeneration = (cells, generations) => {
+        // Deep level copy
+        const cellsCopy = cells.map(arr => [...arr]);
+        const arrayLength = cells[0].length;
+        for(let gen = 0; gen < generations; gen++) {
+            // Array traversal
+            for(let row = 0; row < cellsCopy.length; row++) {   
+                for(let col = 0; col < arrayLength; col++) {
+                    // Variable for current cell
+                    const currCell = cells[row][col];
+                    const neighbors = countNeighbors(row, col, cells);
+                    // If the cell is a 1
+                    if(currCell === 1) {
+                        // If they fail the over/under population check, make it a 0. Else it lives
+                        cellsCopy[row][col] = (neighbors < 2 || neighbors > 3) ? 0 : 1;
+                    } else { // Its a 0
+                        // If we have 3 alive neighbors, it becomes a 1
+                        cellsCopy[row][col] = (neighbors === 3) ? 1 : 0;
+                    }
+                }
+            }
+            cells = cellsCopy.map(arr => [...arr]);
+        }
+        return cells;
     }
-    return 
-}
-
-
-const depthSearch = (array, row, col, remainder, markedOnes) => {
-    if(row < 0 || row >= array.length || col < 0 || col >= array[0].length) {
-        // This is an attempt to access outside the bounds of the board
-        // so skip this direction and continue with the next one.
-        return
-    }
-
-    return
-}
-
-console.log(checkWord( [
-    ["E","A","R","A"],
-    ["N","L","E","C"],
-    ["I","A","I","S"],
-    ["B","Y","O","R"]
-  ], 'BACON'));
     
+const countNeighbors = (x, y, cells) => {
+    let liveNeighbors = 0;
+    for(let i = -1; i <= 1; i++) {
+       for(let j = -1; j <= 1; j++) {
+           if(i === 0 && j === 0) {
+               continue;
+           }
+           let newX = x + i;
+           let newY = y + j;
+           if(newX >= 0 && newY >= 0 && newX < cells.length && newY < cells[0].length) {
+               liveNeighbors += cells[newX][newY] === 1 ? 1 : 0;
+           }
+       }
+    }
+    return liveNeighbors;
+}
+
+console.log(getGeneration(gliders[0], 1))
+
