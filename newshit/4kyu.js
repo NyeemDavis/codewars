@@ -57,7 +57,7 @@ const buildMatchesTable = (n) => {
     // Moving horizontally and vertically
     // Recursion
 
-    var gliders = [
+var gliders = [
         [[1,0,0],
         [0,1,1],
         [1,1,0]],
@@ -71,14 +71,14 @@ const buildMatchesTable = (n) => {
     // 2D Array
     // Check boundaries
     // Map function??
-    const getGeneration = (cells, generations) => {
+const getGeneration = (cells, generations) => {
         // Deep level copy
         const cellsCopy = cells.map(arr => [...arr]);
-        const arrayLength = cells[0].length;
+        const colLength = cells[0].length;
         for(let gen = 0; gen < generations; gen++) {
             // Array traversal
             for(let row = 0; row < cellsCopy.length; row++) {   
-                for(let col = 0; col < arrayLength; col++) {
+                for(let col = 0; col < colLength; col++) {
                     // Variable for current cell
                     const currCell = cells[row][col];
                     const neighbors = countNeighbors(row, col, cells);
@@ -114,5 +114,7 @@ const countNeighbors = (x, y, cells) => {
     return liveNeighbors;
 }
 
-console.log(getGeneration(gliders[0], 1))
 
+
+// Link
+// Problem: 
