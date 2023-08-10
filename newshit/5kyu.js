@@ -9,20 +9,7 @@
     // There may be more moves needed than necessary to win
 
 // Checking for a win
-const directions = {
-    // Rows
-    leftAlongRow: [0, -1, 0],
-    rightAlongRow: [0, 1, 0],
-    // Columns
-    upAlongCol: [0, 0, -1],
-    downAlongCol: [0, 0, -1],
-    // Diagonals
-    mainDiagonal: [0, -1, -1],
-    antiDiagonal: [0, -1, 1],
-    // 3D
-    above: [1, 0, 0],
-    below: [-1, 0, 0]
-}
+
 // Function to play the game with a set of moves
 const playOX3D = (moves) => {
     // Create a 4x4x4 matrix
@@ -58,15 +45,15 @@ const playOX3D = (moves) => {
        }
     }
     // If the loop ends
-    return 'No Winner' 
+    return 'No winner' 
 }
 
 
 // Helper function to check for a winner after each turn
-const checkForWinner = (board, x, y, turn) => {
+const checkForWinner = (board, currentBoard, x, y, turn) => {
     
     // Check 2D board
-    if(checkBoard(currentBoard, x, y, turn)) { return true }
+    if(checkBoard(board, board[currentBoard], x, y, turn)) { return true }
 
     // Check 3D board
     return false
@@ -85,23 +72,15 @@ const checkBoard = (board, x, y, z, turn) => {
 
     // Check main and anti diagonals
         // Check the diags of the item
-    if(checkDirection(board, x, y, z, 1, 1, 0, turn)) {return true}
+        if (checkDirection(board, x, y, z, 1, 1, 0, turn)) return true;
+        if (checkDirection(board, x, y, z, 1, -1, 0, turn)) return true;
+      
+        // Check vertical across boards
+        if (checkDirection(board, x, y, z, 0, 0, 1, turn)) return true;
+      
 
     return false
 };
-
-// Helper function to check the 3D board
-const check3DBoard = (board, currentBoard, x, y, turn) => {
-    // Need to check the current board, the board above, and the board below
-    
-    // Check Rows
-
-    // Check Columns
-
-    // Check main and anti diagonals
-
-    return false
-}
 
 // Helper function to check each direction on the board
 const checkDirection  = (board, x, y, z, dx, dy, dz, turn) => {
@@ -149,11 +128,49 @@ const checkDirection  = (board, x, y, z, dx, dy, dz, turn) => {
 
 
 // Test Cases
-console.log(checkBoard(
-    [
-        ['X', 'O', 'O', 'O'],
-        ['X', 'O', 'X', 'X'],
-        ['X', 'X', 'O', 'X'],
-        ['X', 'X', 'O', 'X'],
-    ], 0, 0, 0, 'X'
-))
+
+
+
+// Move to Front Encoding
+// Link https://www.codewars.com/kata/move-to-front-encoding/
+// Given a string, encode it using the move to front algorithm
+// Notes:
+
+
+const encode = (alphabet, str) => {
+  let result = []
+  const array = str.split('')
+  
+  const length = str.split('').length
+
+  for(i = 0; i < length; i++) {
+   
+    const char = array[i]
+    
+    result.push(alphabet.indexOf(char))
+    
+    alphabet = char + alphabet.slice(0, alphabet.indexOf(char)) + alphabet.slice(alphabet.indexOf(char) + 1)
+  }
+
+  return result
+};
+
+
+const decode = (alphabet, sequence) => {
+  let result = ''
+
+  for(i = 0; i < sequence.length; i++) {
+    const index = sequence[i]
+
+    result += alphabet[index]
+
+    alphabet = alphabet[index] + alphabet.slice(0, index) + alphabet.slice(index + 1)
+
+  }
+
+  return result
+}
+
+console.log(
+  encode('abc', 'ababab')
+  )

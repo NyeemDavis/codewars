@@ -65,6 +65,7 @@ var gliders = [
         [0,0,1],
         [1,1,1]]
     ];
+    
     // Check whether the cell is already dead or alive to skip some checks
     // Recursion to search each neighbor
     // Identify borders
