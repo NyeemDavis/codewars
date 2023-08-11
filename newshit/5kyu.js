@@ -127,50 +127,43 @@ const checkDirection  = (board, x, y, z, dx, dy, dz, turn) => {
 };
 
 
-// Test Cases
+// How many numbers III 
+// Link : https://www.codewars.com/kata/5877e7d568909e5ff90017e6/train/javascript
+// Problem:
+  // Generate all the numbers where, the sum of the digits is equal to ten  
+  // their digits are in ascending order
+  // numbers may have two or more equal contiguous digits
 
+// Input and Output
+  // Input: sum of digits (sum), number of digits (count)
+  // Output: array of numbers that meet the criteria
+      // the total number of values have count digits that add up to sum and in increasing order
+      // The lowest value
+      // The highest value
 
-
-// Move to Front Encoding
-// Link https://www.codewars.com/kata/move-to-front-encoding/
-// Given a string, encode it using the move to front algorithm
 // Notes:
+  // If nothing satisfies the criteria return []
+  // Return value can be a mix of strings and numbers
 
 
-const encode = (alphabet, str) => {
-  let result = []
-  const array = str.split('')
-  
-  const length = str.split('').length
+const findAll = (sum, count) => {
 
-  for(i = 0; i < length; i++) {
-   
-    const char = array[i]
-    
-    result.push(alphabet.indexOf(char))
-    
-    alphabet = char + alphabet.slice(0, alphabet.indexOf(char)) + alphabet.slice(alphabet.indexOf(char) + 1)
-  }
-
-  return result
-};
-
-
-const decode = (alphabet, sequence) => {
-  let result = ''
-
-  for(i = 0; i < sequence.length; i++) {
-    const index = sequence[i]
-
-    result += alphabet[index]
-
-    alphabet = alphabet[index] + alphabet.slice(0, index) + alphabet.slice(index + 1)
-
-  }
-
-  return result
+  return [];
 }
 
-console.log(
-  encode('abc', 'ababab')
-  )
+const getSums = (sum, count) => {
+  // Loop through nums 1-10
+    // count is the amount of times we need to loop
+  let sums = [];
+  for(i = 0; i < count; i++) {
+    
+  }
+  return sums;
+}
+
+// Test cases
+console.log(findAll(10, 3)) // [8, 118, 334]
+console.log(findAll(27, 3)) // [[1, '999', '999']
+console.log(findaAll(84, 4)) // []
+console.log(findAll(35, 6)) // [123, '116999', '566666]
+
