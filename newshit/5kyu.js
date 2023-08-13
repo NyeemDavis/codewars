@@ -164,6 +164,6 @@ const getSums = (sum, count) => {
 // Test cases
 console.log(findAll(10, 3)) // [8, 118, 334]
 console.log(findAll(27, 3)) // [[1, '999', '999']
-console.log(findaAll(84, 4)) // []
+console.log(findAll(84, 4)) // []
 console.log(findAll(35, 6)) // [123, '116999', '566666]
 

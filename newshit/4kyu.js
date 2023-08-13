@@ -119,3 +119,41 @@ const countNeighbors = (x, y, cells) => {
 
 // Link
 // Problem: 
+
+
+
+const topThreeWords = (text) => {
+    // Make sure everything is lowercase in the string
+    textCopy  = text.toLowerCase()
+                    // Replace all new lines with spaces
+                    .replace(/\n/g, ' ')
+                    // Replace anything that is not a letter and isn't a "'"
+                    .split(' ').map(item => item.replace(/[^a-z']/g, ''))
+                    .filter(item => item !== '' && item !== "'");
+
+    let map = {}
+    // Loop
+        // If the word is in the map, increment the value
+    for(i = 0; i < textCopy.length; i++) {
+        const item = textCopy[i]
+
+        if(map[item]) {
+            map[item]++
+        } else {
+            map[item] = 1
+        }
+    }
+
+    // Find the 3 most frequent words.
+        // Sort the map by value
+    const sortedMap = Object.entries(map).sort((a, b) => b[1] - a[1])
+
+    return sortedMap.slice(0, 3).map(item => item[0])
+};
+
+// Test cases
+// console.log(topThreeWords("a a a  b  c c  d d d d  e e e e e"))
+// console.log(topThreeWords("   , e    .. "))
+// console.log(topThreeWords("  //wont won't won't"))
+// console.log(topThreeWords("   '   "))
+
